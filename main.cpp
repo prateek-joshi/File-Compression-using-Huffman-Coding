@@ -1,38 +1,47 @@
 #include<iostream>
 #include<vector>
 #include<queue>
+#include "utils/minHeap.h"
 using namespace std;
 
-struct minHeapNode{
-    char data;
-    unsigned int freq;
-    minHeapNode *left, *right;
+// TODO: create a function to make Huffman codes
+void HuffmanCodes(char *data, int *freq, int size){
+    struct minHeapNode *left, *right, *top;
 
-    minHeapNode(char data, unsigned int freq){
-        left = right = NULL;
-        this->data = data;
-        this->freq = freq;
+    priority_queue<minHeapNode*, vector<minHeapNode*>, compare> minHeap;
+
+    for(int i=0;i<size;i++)
+        minHeap.push(new minHeapNode(data[i], freq[i]));
+
+    while(minHeap.size() > 1){
+        // Extract the two minimum items from the queue
+        left = minHeap.top();
+        minHeap.pop();
+        right = minHeap.top();
+        minHeap.pop();
+
+        // create a new node which is the sum of the frequencies of the
+        // two lowest nodes
+        top = new minHeapNode('#', (left->freq + right->freq));
+        top->left = left;
+        top->right = right;
+
+        // push it onto the queue
+        minHeap.push(top);
     }
-};
-
-//create a function to make Huffman codes
+    cout<<"Huffman Tree Created!\n";
+}
 
 int main(){
-    int data[] = {1,2,23,14,5}; //contains list of characters
-    //int freq[] = {}; //frequency of each character
+    // TODO: write a function to calculate the frequency of all characters in a file.
+
+    char data[] = {'a','f','d','s','e'}; //contains list of characters
+    int freq[] = {10,2,3,5,6}; //frequency of each character
 
     int n = sizeof(data)/sizeof(data[0]);
 
-    priority_queue<int, vector<int>, greater<int>> pq;
-
-    for(auto i: data){
-        pq.push(i);
-    }
-
-    while(!pq.empty()){
-        cout<<pq.top()<<' ';
-        pq.pop();
-    }
+    HuffmanCodes(data, freq, n);
+    
     //create Huffman codes for each character
     cout<<endl;
     return 0;
