@@ -1,4 +1,3 @@
-
 struct minHeapNode{
     char data;
     unsigned int freq;
