@@ -1,10 +1,11 @@
 #include<fstream>
+#include<cstring>
 using namespace std;
 
-fstream & opener(char *filename, int mode){
+void opener(fstream & file, char *filename, ios_base::openmode mode){
     try{
-        fstream file(filename, mode);
+        file.open(filename, mode);
     } catch(exception & e){
-        throw e.what();
+        throw strcat((char*)"Could not open the file: ",filename);
     }
 }
