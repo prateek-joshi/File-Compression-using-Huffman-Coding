@@ -3,15 +3,16 @@
 #include<vector>
 #include<queue>
 #include<iostream>
+#include<map>
 using namespace std;
 
-minHeapNode* HuffmanCodes(char *data, int *freq, int size){
+minHeapNode* HuffmanCodes(unordered_map<char,int> & charFreq){
     struct minHeapNode *left, *right, *top;
 
     priority_queue<minHeapNode*, vector<minHeapNode*>, compare> minHeap;
 
-    for(int i=0;i<size;i++)
-        minHeap.push(new minHeapNode(data[i], freq[i]));
+    for(auto it: charFreq)
+        minHeap.push(new minHeapNode(it.first, it.second));
 
     while(minHeap.size() > 1){
         // Extract the two minimum items from the queue
