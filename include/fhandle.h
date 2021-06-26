@@ -2,8 +2,6 @@
 #include<fstream>
 #include<cstring>
 #include<unordered_map>
-//for now
-#include<iostream>
 using namespace std;
 
 void opener(fstream & file, const char *filename, ios_base::openmode mode){
@@ -24,6 +22,7 @@ unordered_map<char, int> & getFrequencyFromFile(const char *filename){
 
     while(!file.eof()){
         file.getline(line,LINE_SIZE);
+        // add characterwise frequency to map
         for(int i=0; i<LINE_SIZE; i++){
             charFreq[line[i]]++;
         }
