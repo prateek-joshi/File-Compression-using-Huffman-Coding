@@ -1,4 +1,5 @@
-#include "../include/minHeap.h"
+#include "./minHeap.h"
+#include "./fhandle.h"
 #include<string>
 #include<vector>
 #include<queue>
@@ -6,9 +7,9 @@
 #include<map>
 using namespace std;
 
-minHeapNode* HuffmanCodes(unordered_map<char,int> & charFreq){
+minHeapNode* HuffmanCodes(const char *filename){
     struct minHeapNode *left, *right, *top;
-
+    unordered_map<char,int> charFreq = getFrequencyFromFile(filename);
     priority_queue<minHeapNode*, vector<minHeapNode*>, compare> minHeap;
 
     for(auto it: charFreq)
@@ -21,8 +22,7 @@ minHeapNode* HuffmanCodes(unordered_map<char,int> & charFreq){
         right = minHeap.top();
         minHeap.pop();
 
-        // create a new node which is the sum of the frequencies of the
-        // two lowest nodes
+        // create a new node which is the sum of the frequencies of the two lowest nodes
         top = new minHeapNode('#', (left->freq + right->freq));
         top->left = left;
         top->right = right;
@@ -37,10 +37,9 @@ minHeapNode* HuffmanCodes(unordered_map<char,int> & charFreq){
 void generateCodes(struct minHeapNode* root,string code) {
     if(!root)
         return;
-    if(root->data != '#')
-        // cout<<"hash"<<endl;
-        cout<<root->data<<": "<<code<<endl;
 
-    generateCodes(root->left, code+"0");
-    generateCodes(root->right, code+"1");
+    generateCodes(root->left, code+"0");    // 0 if left
+    if(root->data != '#')   //print value if required node is reached (not dummy character)
+        cout<<root->data<<": "<<code<<endl;
+    generateCodes(root->right, code+"1");   // 1 if right
 }
