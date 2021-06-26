@@ -1,5 +1,6 @@
-#include<iostream>
 #include "utils/codegen.h"
+#include "utils/fhandle.h"
+#include<iostream>
 using namespace std;
 
 // Creates a minHeap for generating Huffman codes
@@ -14,7 +15,7 @@ int main(){
 
     minHeapNode *root = HuffmanCodes(data, freq, n);
     generateCodes(root, (char*)"");
-    // TODO: create Huffman codes for each character
+    
     cout<<endl;
     return 0;
 }
