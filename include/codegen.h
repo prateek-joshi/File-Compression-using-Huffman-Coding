@@ -1,4 +1,4 @@
-#include "minHeap.h"
+#include "../include/minHeap.h"
 #include<string>
 #include<vector>
 #include<queue>
