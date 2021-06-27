@@ -1,9 +1,9 @@
 struct minHeapNode{
-    char data;
+    string data;
     unsigned int freq;
     minHeapNode *left, *right;
 
-    minHeapNode(char data, unsigned int freq){
+    minHeapNode(string data, unsigned int freq){
         left = right = nullptr;
         this->data = data;
         this->freq = freq;

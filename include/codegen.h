@@ -13,7 +13,7 @@ int flag = 0; // write mode -> 0, app mode -> 1
 
 minHeapNode* HuffmanCodes(const char *filename){
     struct minHeapNode *left, *right, *top;
-    unordered_map<char,int> charFreq = getFrequencyFromFile(filename);
+    unordered_map<string,int> charFreq = getFrequencyFromFile(filename);
     priority_queue<minHeapNode*, vector<minHeapNode*>, compare> minHeap;
 
     for(auto it: charFreq)
@@ -27,7 +27,7 @@ minHeapNode* HuffmanCodes(const char *filename){
         minHeap.pop();
 
         // create a new node which is the sum of the frequencies of the two lowest nodes
-        top = new minHeapNode('#', (left->freq + right->freq));
+        top = new minHeapNode("#", (left->freq + right->freq));
         top->left = left;
         top->right = right;
 
@@ -43,7 +43,7 @@ void generateCodes(struct minHeapNode* root,string code) {
         return;
 
     generateCodes(root->left, code+"0");    // 0 if left
-    if(root->data != '#') {  //print value if required node is reached (not dummy character)
+    if(root->data != "#") {  //print value if required node is reached (not dummy character)
         if(flag==0) {
             opener(file,(const char*)"codes.txt",ios::out);
             flag = 1;

@@ -1,9 +1,9 @@
 #pragma once
-#define LINE_SIZE 100
 #include<fstream>
 #include<cstring>
 #include<unordered_map>
 #include<iostream>
+#define LINE_SIZE 100
 using namespace std;
 
 void opener(fstream & file, const char *filename, ios_base::openmode mode){
@@ -14,9 +14,9 @@ void opener(fstream & file, const char *filename, ios_base::openmode mode){
     }
 }
 
-unordered_map<char, int> getFrequencyFromFile(const char *filename){
+unordered_map<string, int> getFrequencyFromFile(const char *filename){
     fstream file;
-    unordered_map<char, int> charFreq;
+    unordered_map<string, int> charFreq;
     // unordered_map<char, int>:: iterator it;
     string line;
 
@@ -26,16 +26,19 @@ unordered_map<char, int> getFrequencyFromFile(const char *filename){
         getline(file,line);
         // add characterwise frequency to map
         for(int i=0; i<line.size(); i++){
-            if(charFreq.find(line[i])==charFreq.end())
-                charFreq[line[i]] = 1;
+            string s(1, line[i]);
+            if(charFreq.find(s)==charFreq.end())
+                charFreq[s] = 1;
             else
-                charFreq[line[i]]++;
+                charFreq[s]++;
         }
+        // TODO: handle newlines in text file.
+        charFreq["\\n"]++;
     }
 
-    for(auto it: charFreq)
-        cout<<it.first<<' '<<it.second<<endl;
-    cout<<endl;
+    // for(auto it: charFreq)
+    //     cout<<it.first<<' '<<it.second<<endl;
+    // cout<<endl;
     file.close();
     return charFreq;
 }
