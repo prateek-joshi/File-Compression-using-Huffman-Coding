@@ -1,9 +1,7 @@
 #include "./minHeap.h"
 #include "./fhandle.h"
 #include<string>
-#include<vector>
 #include<queue>
-#include<iostream>
 #include<fstream>
 #include<map>
 using namespace std;
@@ -34,7 +32,6 @@ minHeapNode* HuffmanCodes(const char *filename){
         // push it onto the queue
         minHeap.push(top);
     }
-    cout<<"Huffman Tree Created!\n";
     return minHeap.top();
 }
 
@@ -50,7 +47,9 @@ void generateCodes(struct minHeapNode* root,string code) {
         }
         else
             opener(file,(const char*)"codes.txt",ios::app);
-        file<<root->data<<"|"<<code<<endl;
+        
+        string toWrite = root->data + "|" + code + "\n";
+        file<<toWrite;
         file.close();
     }
     generateCodes(root->right, code+"1");   // 1 if right
