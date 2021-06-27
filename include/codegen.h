@@ -4,8 +4,12 @@
 #include<vector>
 #include<queue>
 #include<iostream>
+#include<fstream>
 #include<map>
 using namespace std;
+
+fstream file;
+int flag = 0; // write mode -> 0, app mode -> 1
 
 minHeapNode* HuffmanCodes(const char *filename){
     struct minHeapNode *left, *right, *top;
@@ -39,7 +43,15 @@ void generateCodes(struct minHeapNode* root,string code) {
         return;
 
     generateCodes(root->left, code+"0");    // 0 if left
-    if(root->data != '#')   //print value if required node is reached (not dummy character)
-        cout<<root->data<<": "<<code<<endl;
+    if(root->data != '#') {  //print value if required node is reached (not dummy character)
+        if(flag==0) {
+            opener(file,(const char*)"codes.txt",ios::out);
+            flag = 1;
+        }
+        else
+            opener(file,(const char*)"codes.txt",ios::app);
+        file<<root->data<<"|"<<code<<endl;
+        file.close();
+    }
     generateCodes(root->right, code+"1");   // 1 if right
 }
