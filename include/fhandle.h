@@ -14,9 +14,9 @@ void opener(fstream & file, const char *filename, ios_base::openmode mode){
     }
 }
 
-unordered_map<string, int> getFrequencyFromFile(const char *filename){
+unordered_map<string, long long> getFrequencyFromFile(const char *filename){
     fstream file;
-    unordered_map<string, int> charFreq;
+    unordered_map<string, long long> charFreq;
     // unordered_map<char, int>:: iterator it;
     string line;
 

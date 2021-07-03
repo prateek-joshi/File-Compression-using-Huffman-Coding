@@ -11,7 +11,7 @@ int flag = 0; // write mode -> 0, app mode -> 1
 
 minHeapNode* HuffmanCodes(const char *filename){
     struct minHeapNode *left, *right, *top;
-    unordered_map<string,int> charFreq = getFrequencyFromFile(filename);
+    unordered_map<string,long long> charFreq = getFrequencyFromFile(filename);
     priority_queue<minHeapNode*, vector<minHeapNode*>, compare> minHeap;
 
     for(auto it: charFreq)
