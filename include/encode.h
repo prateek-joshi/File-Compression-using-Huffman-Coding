@@ -12,10 +12,12 @@ unordered_map<string,long long> unpackCodesFromFile(string codefile){
 
     while(!file.eof()){
         string key, code;
+        char *end;
+
         getline(file, key, '|');
         getline(file,code,'\n');
 
-        codes[key] = stoi(code, nullptr, 2);
+        codes[key] = strtoll(code.c_str(),&end,2);
     }
 
     return codes;
