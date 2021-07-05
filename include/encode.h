@@ -1,6 +1,7 @@
 #pragma once
 #include "./fhandle.h"
 #include<string>
+#include<bitset>
 #include<iostream> //temporary
 using namespace std;
 
@@ -22,11 +23,16 @@ unordered_map<string,string> unpackCodesFromFile(string codefile){
     return codes;
 }
 
-// TODO
-long long encodeText(unordered_map<string, long long> codes, string line){
-    long long compressedText = 0;
+void storeEncodedText(string bstring){
+    char *end;
+    long long compressedText = strtoll(bstring.c_str(), &end, 2);
 
-    return compressedText;
+    fstream bfile;
+    long long size = 0;
+
+    opener(bfile, "compressed.bin", ios::binary|ios::out);
+    bfile << compressedText;
+    bfile.close();
 }
 
 void compressFile(string codefile, string file) {
@@ -49,5 +55,7 @@ void compressFile(string codefile, string file) {
         encodedString += codes["\\n"];
     }
     cout<<encodedString<<endl;
+    storeEncodedText(encodedString);
+    // convert encoded string to binary and append to file
     datafile.close();
 }
