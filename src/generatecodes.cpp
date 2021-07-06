@@ -1,7 +1,10 @@
 #include "../include/fhandle.h"
 #include "../include/codegen.h"
+#include "../include/encode.h"
 #include<iostream>
 using namespace std;
+
+string codefile = "codes.txt";
 
 int main(int argc, char *argv[]){
     // check if filename is provided.
@@ -11,7 +14,7 @@ int main(int argc, char *argv[]){
         minHeapNode *root = HuffmanCodes(argv[1]);
         generateCodes(root, (char*)"");
 
-        cout<<endl;
+        compressFile(codefile,"sample_file.txt");
     }
     return 0;
 }
