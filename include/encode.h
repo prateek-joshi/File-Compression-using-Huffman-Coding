@@ -54,7 +54,7 @@ void compressFile(string codefile, string file) {
         }
         encodedString += codes["\\n"];
     }
-    cout<<encodedString<<endl;
+    // cout<<encodedString<<endl;
     storeEncodedText(encodedString);
     // convert encoded string to binary and append to file
     datafile.close();
