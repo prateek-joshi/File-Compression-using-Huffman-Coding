@@ -11,10 +11,11 @@ int main(int argc, char *argv[]){
     if(argc==1)
         cout<< "Filename not provided.\n";
     else{
-        minHeapNode *root = HuffmanCodes(argv[1]);
+        string filename = argv[1];
+        minHeapNode *root = HuffmanCodes(filename.c_str());
         generateCodes(root, (char*)"");
 
-        compressFile(codefile,"sample_file.txt");
+        compressFile(codefile,filename);
     }
     return 0;
 }
