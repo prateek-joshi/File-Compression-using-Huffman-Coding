@@ -1,6 +1,6 @@
 #include "../include/fhandle.h"
 #include "../include/codegen.h"
-#include "../include/encode.h"
+#include "../include/encdec.h"
 #include<iostream>
 using namespace std;
 
